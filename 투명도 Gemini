@@ -1,0 +1,14 @@
+//JS를 사용하여 Speckle 뷰어의 객체와 **COBie 엑셀 데이터(JSON 변정 상태)**를 ExtIdentifier로 매칭하고, 여러 시트의 정보를 하나로 묶는(Join) 실전 코드를 작성해 드립니다.
+
+//1. 데이터 구조 가정
+//COBie 엑셀 파일을 JSON으로 변환하면 보통 아래와 같은 구조를 가집니다.
+
+//JavaScript
+const cobieData = {
+  Component: [ { Name: "Supply Diffuser 01", ExtIdentifier: "guid-123", TypeName: "Diffuser Type A", ... }, ... ],
+  Type: [ { Name: "Diffuser Type A", ExtIdentifier: "type-guid-456", Manufacturer: "Samsung", ... }, ... ],
+  Attribute: [ { RowName: "Supply Diffuser 01", PropertyName: "AirFlow", Value: "150", ... }, ... ]
+};
+
+//2. 다중 시트 통합 매칭 로직 (JS)
+//이 코드는 클릭한 객체의 ID를 사용하여 Component → Type → Attribute 순으로 데이터를 추적하여 하나의 완성된 객체로 만듭니다.
